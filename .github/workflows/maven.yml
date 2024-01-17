@@ -1,30 +1,34 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Java CI with Maven
-
-on: 
+name: SonarCloud
+on:
+  push:
+    branches:
+      [main, develop, release]
   pull_request:
-    branches: [ "main","release", "develop"]
-
+    types: [opened, synchronize, reopened]
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-    steps:  
+    steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'          
+          distribution: 'temurin'
           cache: maven
-      - run: mvn test --file pom.xml   
-      
+      - run: mvn test
+      - name: Generate JaCoCo Badge
+        id: jacoco
+        # You may pin to the exact commit or the version.
+        # uses: cicirello/jacoco-badge-generator@f33476a5a3fd5a4f77cb5eef2ebe728c1dd5b921
+        uses: cicirello/jacoco-badge-generator@v2.11.0
+        with:
+          fail-if-coverage-less-than: 8
+          # Enables failing workflow run when branches coverage below specified threshold.
+          fail-if-branches-less-than: 8
+          # Enables failing workflow if coverage is less than it was on previous run.
+          fail-on-coverage-decrease: 8
+          fail-on-branches-decrease: 8
   sonar:
     needs: unit-test
     name: Build and analyze
@@ -37,7 +41,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: 'temurin' # Alternative distribution options are available.
+          distribution: 'zulu' # Alternative distribution options are available.
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
@@ -54,6 +58,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        #run: mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent install org.jacoco:jacoco-maven-plugin:report verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dmaven.test.failure.ignore=true
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=danielcorreaa_tech-challenge-v2
-
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=danielcorreaa_tech-challenge-customer
