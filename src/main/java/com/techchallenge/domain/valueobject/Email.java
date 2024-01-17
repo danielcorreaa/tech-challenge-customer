@@ -12,9 +12,7 @@ public class Email {
 	}
 
 	private String validate(String value) {
-	    Pattern pattern = Pattern.compile(REGEX);
-	    Matcher matcher = pattern.matcher(value);
-	    if(matcher.matches()) {
+	    if(Pattern.compile(REGEX).matcher(value).matches()) {
 	    	return value;
 	    }
 	    throw new IllegalArgumentException("Invalid Email!");
