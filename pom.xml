@@ -120,7 +120,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<!-- Core Techchallenge Dependency -->
 		<dependency>
 			<groupId>com.techchallenge</groupId>
