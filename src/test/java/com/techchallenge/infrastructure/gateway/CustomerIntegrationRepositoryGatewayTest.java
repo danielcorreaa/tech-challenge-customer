@@ -25,6 +25,7 @@ import com.techchallenge.domain.entity.Customer;
 import com.techchallenge.infrastructure.persistence.entity.CustomerEntity;
 import com.techchallenge.infrastructure.persistence.mapper.CustomerEntityMapper;
 import com.techchallenge.infrastructure.persistence.repository.CustomerRepository;
+import org.testcontainers.utility.DockerImageName;
 
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
@@ -34,7 +35,7 @@ class CustomerIntegrationRepositoryGatewayTest {
 
     @SuppressWarnings("rawtypes")
 	@Container
-    static MySQLContainer mySQLContainer = new MySQLContainer("mysql:latest");
+    static MySQLContainer mySQLContainer = new MySQLContainer(DockerImageName.parse("mysql:8.0-debian"));
 
     CustomerGateway gateway;
 
