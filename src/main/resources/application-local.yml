@@ -5,9 +5,9 @@ spring:
     name: tech-challenge-customer
   datasource:
     url: >-
-      jdbc:mysql://${DB_SERVER}/${DB_NAME}?useTimezone=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+      jdbc:mysql://localhost:3306/customer?useTimezone=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: dani
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
