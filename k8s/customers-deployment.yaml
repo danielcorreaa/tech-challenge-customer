@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tech-challenge-customer
+  name: customer
   labels:
-    app: tech-challenge-customer
+    app: customer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-challenge-customer
+      app: customer
   template:
     metadata:
       labels:
-        app: tech-challenge-customer
+        app: customer
     spec:
       containers:
-      - name: tech-challenge-customer
-        image: daniel36/tech-challenge-customer:02
+      - name: customer
+        image: daniel36/customer:02
         imagePullPolicy: IfNotPresent
         ports:
           - name: http

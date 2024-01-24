@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tech-challenge-customer
+  name: customer
   labels:
-    app: tech-challenge-customer
+    app: customer
 spec:
   type: LoadBalancer
   selector:
-    app: tech-challenge-customer
+    app: customer
   ports:
     - protocol: TCP
       name: http
