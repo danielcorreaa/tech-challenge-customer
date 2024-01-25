@@ -54,6 +54,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: docker-compose up -d
+      - run: docker ps
       - run: mvn test -P system-test
 
   sonar:
