@@ -234,6 +234,9 @@
 								<include>**/*IT.java</include>
 								<include>**/*Test.java</include>
 							</includes>
+							<excludes combine.self="override">
+								<exclude>**/CucumberTest.java</exclude>
+							</excludes>
 						</configuration>
 					</plugin>
 				</plugins>

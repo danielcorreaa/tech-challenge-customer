@@ -99,7 +99,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - run: mvn clean install  -P unit-test --file pom.xml
+      - run: mvn clean install -P unit-test --file pom.xml
 
   docker-pull-image:
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
