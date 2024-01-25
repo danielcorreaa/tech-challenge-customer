@@ -269,6 +269,8 @@
 						<version>3.1.2</version>
 						<configuration>
 							<includes combine.self="override">
+								<include>**/*IT.java</include>
+								<include>**/*Test.java</include>
 								<include>**/CucumberTest.java</include>
 							</includes>
 							<excludes combine.self="override">
