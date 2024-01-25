@@ -111,13 +111,19 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>7.14.1</version>
+			<version>7.13.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
-			<version>7.14.1</version>
+			<version>7.13.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<version>1.9.3</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -211,58 +217,10 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.1.2</version>
-				<configuration>
-					<excludes>
-						<exclude>**/bdd/**</exclude>
-					</excludes>
-					<properties>
-						<configurationParameters>
-							junit.jupiter.displayname.generator.default.remove-parent=true
-						</configurationParameters>
-					</properties>
-					<systemPropertyVariables>
-						<junit.jupiter.extensions.autodetection.enabled>true
-						</junit.jupiter.extensions.autodetection.enabled>
-						<allure.results.directory>${project.build.directory}/allure-results
-						</allure.results.directory>
-					</systemPropertyVariables>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjweaver</artifactId>
-						<version>${aspectj.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
-		<profile>
-			<id>unit-test</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>3.1.2</version>
-						<configuration>
-							<includes combine.self="override">
-								<include>**/*IT.java</include>
-							</includes>
-							<excludes combine.self="override">
-								<include>**/*Test.java</include>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 		<profile>
 			<id>integration-test</id>
 			<build>
@@ -297,11 +255,6 @@
 							</includes>
 							<excludes combine.self="override">
 							</excludes>
-							<properties>
-								<configurationParameters>
-									cucumber.junit-platform.naming-strategy=long
-								</configurationParameters>
-							</properties>
 						</configuration>
 					</plugin>
 				</plugins>

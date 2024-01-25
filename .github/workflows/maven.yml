@@ -53,7 +53,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - run: java -jar ./target/tech-challenge-customer-*.jar
       - run: mvn test -P system-test
+
   sonar:
     needs: Bdd-test
     name: Build and analyze

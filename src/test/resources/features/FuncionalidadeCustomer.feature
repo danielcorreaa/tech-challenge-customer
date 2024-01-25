@@ -1,6 +1,7 @@
 # language: pt
 Funcionalidade: API - Customer
 
+  @smoke
   Cenário: Cadastrar Cliente
     Dado que quero cadastrar um cliente
     Quando informar um cpf válido e informar um email válido
