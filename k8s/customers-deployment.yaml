@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: customer
-        image: daniel36/customer:02
+        image: daniel36/tech-challenge-customer:23
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
@@ -46,4 +46,5 @@ spec:
               name: mysql-config-map
               key: mysql-user-username
 
+        
 ---

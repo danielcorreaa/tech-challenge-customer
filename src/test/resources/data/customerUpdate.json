@@ -1,0 +1,8 @@
+{
+  "code":200,
+  "body":{
+    "cpf": "09651313005",
+    "name": "Doug Funny Test",
+    "email": "doug@email.com"
+  }
+}

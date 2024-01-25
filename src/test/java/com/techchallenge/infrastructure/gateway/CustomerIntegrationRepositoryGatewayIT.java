@@ -31,7 +31,7 @@ import org.testcontainers.utility.DockerImageName;
 @ExtendWith(SpringExtension.class)
 @Testcontainers
 @ContextConfiguration( classes = {MysqlTestConfig.class})
-class CustomerIntegrationRepositoryGatewayTest {
+class CustomerIntegrationRepositoryGatewayIT {
 
     @SuppressWarnings("rawtypes")
 	@Container
