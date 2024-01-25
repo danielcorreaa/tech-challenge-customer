@@ -53,6 +53,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - run: docker ps
+      - run: mvn clean install --file pom.xml
       - run: java -jar ./target/tech-challenge-customer-*.jar
       - run: mvn test -P system-test
 
