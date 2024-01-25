@@ -1,0 +1,36 @@
+version: '3.2'
+ 
+services:
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "dani"
+      MYSQL_DATABASE: "customer"
+    networks:
+      - ambiente
+  app:
+    restart: always
+    container_name: App
+    image: daniel36/tech-challenge-customer:23
+    ports:
+      - "8000:8000"
+      - "8082:8085"
+    environment:
+      DB_SERVER: mysqldb
+      DB_NAME: customer
+      DB_USERNAME: root
+      DB_PASSWORD: dani
+    depends_on:
+      - mysqldb
+    links:
+        - mysqldb
+    networks:
+      - ambiente
+networks: 
+  ambiente:
+    driver: bridge
