@@ -16,7 +16,8 @@ services:
   app:
     restart: always
     container_name: App
-    image: daniel36/tech-challenge-customer:23
+    build:
+      context: .
     ports:
       - "8000:8000"
       - "8085:8082"
