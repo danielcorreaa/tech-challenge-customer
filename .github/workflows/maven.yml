@@ -7,6 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   unit-test:
+    name: Test Coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +33,7 @@ jobs:
 
   integration-test:
     needs: unit-test
+    name: Test Integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,6 +46,7 @@ jobs:
       - run: mvn test -P integration-test
   Bdd-test:
     needs: integration-test
+    name: Test BDD
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,13 +56,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - run: mvn clean install -DskipTests
       - run: docker-compose up -d
       - run: docker ps
       - run: mvn test -P system-test
 
   sonar:
     needs: Bdd-test
-    name: Build and analyze
+    name: Analyze Sonar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -89,6 +93,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=danielcorreaa_tech-challenge-customer
 
   build:
+    name: Build Application
     runs-on: ubuntu-latest
     needs: sonar
     steps:
@@ -102,6 +107,7 @@ jobs:
       - run: mvn clean install -P unit-test --file pom.xml
 
   docker-pull-image:
+    name: Pull Image Docker Hub
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
@@ -122,18 +128,21 @@ jobs:
         run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
 
   deploy-dev:
+    name: Deploy dev aws
     needs: docker-pull-image
     if: github.ref == 'refs/heads/develop'
     uses: ./.github/workflows/deploy-dev.yml
     secrets: inherit
 
   deploy-qa:
+    name: Deploy qa aws
     needs: docker-pull-image
     if: github.ref == 'refs/heads/release'
     uses: ./.github/workflows/deploy-release.yml
     secrets: inherit
 
   deploy-prod:
+    name: Deploy production aws
     needs: docker-pull-image
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy-prod.yml

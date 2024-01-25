@@ -127,20 +127,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Core Techchallenge Dependency -->
-		<dependency>
-			<groupId>com.techchallenge</groupId>
-			<artifactId>tech-challenge-core</artifactId>
-			<version>${tech.challenge.core.version}</version>
-		</dependency>
-
-		<!-- Lombok Dependency -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- test controller -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
@@ -170,6 +156,22 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- Core Techchallenge Dependency -->
+		<dependency>
+			<groupId>com.techchallenge</groupId>
+			<artifactId>tech-challenge-core</artifactId>
+			<version>${tech.challenge.core.version}</version>
+		</dependency>
+
+		<!-- Lombok Dependency -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
 
 	</dependencies>
 
