@@ -19,7 +19,7 @@ services:
     image: daniel36/tech-challenge-customer:23
     ports:
       - "8000:8000"
-      - "8082:8085"
+      - "8085:8082"
     environment:
       DB_SERVER: mysqldb
       DB_NAME: customer
