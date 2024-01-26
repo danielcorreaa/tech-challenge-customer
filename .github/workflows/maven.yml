@@ -67,6 +67,7 @@ jobs:
       - run: mvn test -P system-test
       - uses: deblockt/cucumber-report-annotations-action@v1.13
         with:
+          access-token: ${{secrets.GITHUB_TOKEN}}
           #show-global-summary-report: true
           path: ./target/cucumber-reports/cucumber.html
       - run: docker-compose down
