@@ -44,6 +44,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: mvn test -P integration-test
+
   Bdd-test:
     needs: integration-test
     name: Test BDD
@@ -56,7 +57,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - run: mvn clean install
+      - run: mvn clean install -P unit-test
       - run: docker-compose up -d
       - run: docker ps
       - run: mvn test -P system-test
