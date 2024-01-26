@@ -65,10 +65,8 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-        uses: deblockt/cucumber-report-annotations-action@v1.13
-        with:
-            show-global-summary-report: true
-            
+       
+
       - uses: actions/upload-artifact@v3
         with:
           name: Cucumber Reports
