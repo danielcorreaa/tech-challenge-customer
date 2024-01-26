@@ -65,10 +65,14 @@ jobs:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
       #- run: echo [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
-      - name: Cucumber Reports
-        uses: pavi2410/html-preview-action@v2
-        with:
-          html_file: 'target/cucumber-reports/cucumber.html'
+      - name: Save state
+        run: echo "{Cucumber-Reports}='target/cucumber-reports/cucumber.html'" >> $GITHUB_STATE
+      - name: Set output
+        run: echo "{Cucumber-Reports}='target/cucumber-reports/cucumber.html'" >> $GITHUB_OUTPUT
+     # - name: Cucumber Reports
+      #  uses: pavi2410/html-preview-action@v2
+     #   with:
+    #      html_file: 'target/cucumber-reports/cucumber.html'
       - run: docker-compose down
       
   sonar:
