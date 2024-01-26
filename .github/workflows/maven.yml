@@ -1,4 +1,4 @@
-name: SonarCloud
+name: Java CI with Maven
 on:
   push:
     branches:
@@ -64,10 +64,7 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      - uses: deblockt/cucumber-report-annotations-action@v1.7
-        with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          path: "**/cucumber-report.json"
+      - run: echo  [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
       - run: docker-compose down
       
   sonar:
@@ -117,7 +114,7 @@ jobs:
 
   docker-pull-image:
     name: Pull Image Docker Hub
-    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -132,9 +129,11 @@ jobs:
       - name: Login Docker Hub
         run: docker login -u daniel36 -p ${{ secrets.PASSWORD_DOCKER_HUB }}
       - name: Build docker image
-        run: docker build -t daniel36/tech-challenge-customer:${{github.run_number}} .
+      - run: docker build -t daniel36/tech-challenge-customer:${{github.run_number}} .
+      - run: docker build -t daniel36/tech-challenge-customer:latest .
       - name: Push image docker
-        run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
+      - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
+      - run: docker push daniel36/tech-challenge-customer:latest
 
   deploy-dev:
     name: Deploy dev aws
