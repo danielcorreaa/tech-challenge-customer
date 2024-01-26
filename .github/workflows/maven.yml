@@ -44,7 +44,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: mvn test -P integration-test
-      - echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
+          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
 
   Bdd-test:
     needs: integration-test
