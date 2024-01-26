@@ -60,7 +60,11 @@ jobs:
       - run: mvn clean install -P unit-test
       - run: docker-compose up -d
       - run: docker ps
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '30' # for 30 seconds
       - run: mvn test -P system-test
+      - run: docker-compose down
 
   sonar:
     needs: Bdd-test
