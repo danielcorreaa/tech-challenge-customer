@@ -46,7 +46,7 @@ jobs:
       - run: mvn test -P integration-test         
 
   Bdd-test:
-    #needs: integration-test
+    needs: integration-test
     name: Test BDD
     runs-on: ubuntu-latest
     steps:
@@ -64,16 +64,11 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      #- run: echo [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
-      - name: Cucumber Reports
-      - uses: ./target
+      - uses: actions/upload-artifact@v3
         with:
-          paths: cucumber-reports/*.html
-          output: cucumber-reports/cucumber.html
-     # - name: Cucumber Reports
-      #  uses: pavi2410/html-preview-action@v2
-     #   with:
-    #      html_file: 'target/cucumber-reports/cucumber.html'
+          name: Cucumber Reports
+          path: ./target/cucumber-reports/cucumber.html
+
       - run: docker-compose down
       
   sonar:
