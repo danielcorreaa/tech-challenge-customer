@@ -1,4 +1,4 @@
-name: Java CI CD
+name: Java CI with Maven
 on:
   push:
     branches:
@@ -64,7 +64,10 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      #- run: echo  [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
+      - uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "**/cucumber-report.json"
       - run: docker-compose down
       
   sonar:
@@ -129,11 +132,9 @@ jobs:
       - name: Login Docker Hub
         run: docker login -u daniel36 -p ${{ secrets.PASSWORD_DOCKER_HUB }}
       - name: Build docker image
-      - run: docker build -t daniel36/tech-challenge-customer:${{github.run_number}} .
-      #- run: docker build -t daniel36/tech-challenge-customer:latest .
+        run: docker build -t daniel36/tech-challenge-customer:${{github.run_number}} .
       - name: Push image docker
-      - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
-      #- run: docker push daniel36/tech-challenge-customer:latest
+        run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
 
   deploy-dev:
     name: Deploy dev aws
