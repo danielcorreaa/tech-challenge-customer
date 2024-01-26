@@ -273,13 +273,16 @@
 							</includes>
 							<excludes combine.self="override">
 							</excludes>
+							<properties>
+								<configurationParameters>
+									cucumber.junit-platform.naming-strategy=long
+								</configurationParameters>
+							</properties>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
 	</profiles>
-
-
 
 </project>
