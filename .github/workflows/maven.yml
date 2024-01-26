@@ -138,10 +138,12 @@ jobs:
       - name: Push image docker
       - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
 
-      - name: Build docker image latest
-      - run: docker build -t daniel36/tech-challenge-customer:latest .
-      - name: Push image docker latest
-      - run: docker push daniel36/tech-challenge-customer:latest
+      #- name: Build docker image latest
+      #- run: docker build -t daniel36/tech-challenge-customer:latest .
+      #- name: Push image docker latest
+      #- run: docker push daniel36/tech-challenge-customer:latest
+
+
 
   deploy-dev:
     name: Deploy dev aws
