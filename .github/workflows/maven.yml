@@ -135,10 +135,11 @@ jobs:
         run: docker login -u daniel36 -p ${{ secrets.PASSWORD_DOCKER_HUB }}
       - name: Build docker image
       - run: docker build -t daniel36/tech-challenge-customer:${{github.run_number}}
-      - name: Build docker image latest
-      - run: docker build -t daniel36/tech-challenge-customer:latest .
       - name: Push image docker
       - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
+
+      - name: Build docker image latest
+      - run: docker build -t daniel36/tech-challenge-customer:latest .
       - name: Push image docker latest
       - run: docker push daniel36/tech-challenge-customer:latest
 
