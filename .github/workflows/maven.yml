@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -69,7 +69,7 @@ jobs:
         with:
           access-token: ${{secrets.GITHUB_TOKEN}}
           #show-global-summary-report: true
-          path: ./target/cucumber-reports/cucumber.html
+          #path: ./target/cucumber-reports/cucumber.html
       - run: docker-compose down
       
   sonar:
