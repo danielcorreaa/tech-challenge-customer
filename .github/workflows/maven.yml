@@ -68,7 +68,7 @@ jobs:
       - uses: deblockt/cucumber-report-annotations-action@v1.13
         with:
           access-token: ${{secrets.GITHUB_TOKEN}}
-          #show-global-summary-report: true
+          show-global-summary-report: true
           path: pretty,html:target/cucumber-reports/cucumber.html,json:target/cucumber-reports/cucumber.json
       - run: docker-compose down
       
@@ -77,7 +77,7 @@ jobs:
     name: Analyze Sonar
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@4
+      - uses: actions/checkout@3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 17
