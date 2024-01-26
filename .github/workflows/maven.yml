@@ -65,7 +65,7 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      - uses: deblockt/cucumber-report-annotations-action@v1.13
+      - uses: deblockt/cucumber-report-annotations-action@61108ed1f0584e0bc5ff9772d028d3c64f943fd2
         with:
           access-token: ${{secrets.GITHUB_TOKEN}}
           show-global-summary-report: true
