@@ -140,7 +140,7 @@ jobs:
       - name: Push image docker
       - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
       - name: Push image docker latest
-      - run: docker push daniel36/tech-challenge-customer:${{github.run_number}}
+      - run: docker push daniel36/tech-challenge-customer:latest
 
   deploy-dev:
     name: Deploy dev aws
