@@ -43,8 +43,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - run: mvn test -P integration-test
-          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
+      - run: mvn test -P integration-test         
 
   Bdd-test:
     needs: integration-test
@@ -65,8 +64,9 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
+          echo $(TIMESTAMP) [INFO] cucumber HTML report generate in:./target/cucumber-reports/cucumber.html
       - run: docker-compose down
-
+      
   sonar:
     needs: Bdd-test
     name: Analyze Sonar
