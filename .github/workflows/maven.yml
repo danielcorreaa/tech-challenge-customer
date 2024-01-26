@@ -46,7 +46,7 @@ jobs:
           cache: maven
       - run: mvn test -P integration-test         
 
-  Bdd-test:
+  bdd-test:
     needs: integration-test
     name: Test BDD
     runs-on: ubuntu-latest
@@ -69,11 +69,11 @@ jobs:
         with:
           access-token: ${{secrets.GITHUB_TOKEN}}
           show-global-summary-report: true
-          path: pretty,html:target/cucumber-reports/cucumber.html,json:target/cucumber-reports/cucumber.json
+          #path: pretty,html:target/cucumber-reports/cucumber.html,json:target/cucumber-reports/cucumber.json
       - run: docker-compose down
       
   sonar:
-    needs: unit-test
+    needs: bdd-test
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
