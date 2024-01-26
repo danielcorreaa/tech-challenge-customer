@@ -65,13 +65,9 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-       
-
-      - uses: actions/upload-artifact@v3
+        uses: deblockt/cucumber-report-annotations-action@v1.13
         with:
-          name: Cucumber Reports
-          path: ./target/cucumber-reports/cucumber.html
-
+          show-global-summary-report: true
       - run: docker-compose down
       
   sonar:
