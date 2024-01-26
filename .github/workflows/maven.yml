@@ -64,7 +64,10 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-          echo [INFO] cucumber HTML report generate in:./target/cucumber-reports/cucumber.html
+      - uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "**/cucumber-report.json"
       - run: docker-compose down
       
   sonar:
