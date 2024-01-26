@@ -64,7 +64,7 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      - run: echo  [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
+      #- run: echo  [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
       - run: docker-compose down
       
   sonar:
