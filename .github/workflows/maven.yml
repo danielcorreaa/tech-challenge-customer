@@ -65,10 +65,11 @@ jobs:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
       #- run: echo [INFO] cucumber HTML report generate in:target/cucumber-reports/cucumber.html
-      - uses: actions/upload-artifact@v3
+      - name: Cucumber Reports
+      - uses: ./target
         with:
-          name: test-summary
-          path: ./target/cucumber-reports/cucumber.html
+          paths: cucumber-reports/*.html
+          output: cucumber-reports/cucumber.html
      # - name: Cucumber Reports
       #  uses: pavi2410/html-preview-action@v2
      #   with:
