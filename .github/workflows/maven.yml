@@ -65,11 +65,10 @@ jobs:
         with:
           time: '30' # for 30 seconds
       - run: mvn test -P system-test
-      - uses: deblockt/cucumber-report-annotations-action@61108ed1f0584e0bc5ff9772d028d3c64f943fd2
+      - uses: actions/upload-artifact@v3
         with:
-          access-token: ${{secrets.GITHUB_TOKEN}}
-          show-global-summary-report: true
-          #path: pretty,html:target/cucumber-reports/cucumber.html,json:target/cucumber-reports/cucumber.json
+          name: Cucumber Reports
+          path: ./target/cucumber-reports/cucumber.html
       - run: docker-compose down
       
   sonar:
