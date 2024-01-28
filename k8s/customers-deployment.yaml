@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+  labels:
+    app: customer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer
+  template:
+    metadata:
+      labels:
+        app: customer
+    spec:
+      containers:
+      - name: customer
+        image: daniel36/tech-challenge-customer:23
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: http
+            containerPort: 8082
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "512Mi"
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: mysql-user-password
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config-map
+              key: mysql-server
+
+        - name: DB_NAME
+          value: customer
+
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config-map
+              key: mysql-user-username
+
+
+---
