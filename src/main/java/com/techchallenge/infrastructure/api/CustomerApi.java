@@ -23,7 +23,9 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/customers")
-public class CustomerApi {
+public class
+
+CustomerApi {
 
 	private CustomerUseCase custumerUseCase;
 	private CustomerMapper mapper;

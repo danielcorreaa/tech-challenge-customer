@@ -35,6 +35,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -66,23 +67,33 @@ class CustomerApiIT {
     @LocalServerPort
     private int port;
     @Container
-    static MySQLContainer mySQLContainer = new MySQLContainer(DockerImageName.parse("mysql:8.0-debian"));
+    static MySQLContainer mySQLContainer =
+            new MySQLContainer(DockerImageName.parse("mysql:8.0-debian"));
+
+    @Container
+    static KafkaContainer kafkaContainer =
+            new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.0"));
 
     @DynamicPropertySource
-    public static void configureTestProperties(DynamicPropertyRegistry registry){
+    static void overrrideMongoDBContainerProperties(DynamicPropertyRegistry registry){
         registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
         registry.add("spring.datasource.username", mySQLContainer::getUsername);
         registry.add("spring.datasource.password", mySQLContainer::getPassword);
-        registry.add("spring.jpa.hibernate.ddl-auto",() -> "create");
+
+        registry.add("spring.kafka.bootstrap-servers", kafkaContainer::getBootstrapServers);
+
     }
     @BeforeAll
-    static void init(){
+    static void setUp(){
         mySQLContainer.withReuse(true);
         mySQLContainer.start();
+        kafkaContainer.withReuse(true);
+        kafkaContainer.start();
     }
     @AfterAll
-    static void end(){
+    static void setDown(){
         mySQLContainer.stop();
+        kafkaContainer.stop();
     }
     @BeforeEach
     void up(){
