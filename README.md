@@ -8,6 +8,9 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 - [@danielcorreaa](https://github.com/danielcorreaa)
 
+## Stack utilizada
+
+**Back-end:** Java, Spring Boot,  Mysql, Kafka
 
 ## Documentação da API
 
@@ -121,14 +124,4 @@ Microsserviço responsável pelo gerenciamento de clientes
 #### Desenho da solução
 
 ![Desenho Padrão Saga coreografado.](/images/saga-diagrama.png)
-
-
-
-
-
-
-## Stack utilizada
-
-
-**Back-end:** Java, Spring Boot,  Mysql, Kafka
 
