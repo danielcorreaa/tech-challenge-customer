@@ -120,7 +120,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 #### Desenho da solução
 
-
+![Desenho Padrão Saga coreografado.](/images/saga-diagrama.png)
 
 
 
