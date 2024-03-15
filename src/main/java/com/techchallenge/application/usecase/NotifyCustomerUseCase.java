@@ -10,4 +10,5 @@ public interface NotifyCustomerUseCase {
 
     List<NotifyCustomer> findNotSent();
 
+    NotifyCustomer findOrderId(String orderId);
 }

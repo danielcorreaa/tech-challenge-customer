@@ -4,6 +4,7 @@ import com.techchallenge.application.usecase.CustomerUseCase;
 import com.techchallenge.application.usecase.NotifyCustomerUseCase;
 import com.techchallenge.domain.entity.Customer;
 import com.techchallenge.domain.entity.NotifyCustomer;
+import com.techchallenge.domain.valueobject.Cpf;
 import com.techchallenge.infrastructure.message.MessagePaymentDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -24,13 +25,14 @@ public class PaymentConsumer {
     }
 
     @KafkaListener(topics = "${kafka.topic.consumer.error.payment}",
-            groupId = "${kafka.topic.consumer.error.payment}",
+            groupId = "${kafka.topic.consumer.error.groupId}",
             containerFactory = "kafkaListenerContainerFactoryMessagePaymentDto")
     public void listenPayment(MessagePaymentDto message, Acknowledgment ack) {
         log.info("Received Message Error Payment: {}", message);
         try {
             String description = "O seu pedido teve o pagamento reprovado!";
-            Customer customer = customerUseCase.findByCpf(message.cpfCustomer());
+            String cpf = new Cpf(message.cpfCustomer()).getValueWithoutEspecialCaracter();
+            Customer customer = customerUseCase.findByCpf(cpf);
             NotifyCustomer notifyCustomer = new NotifyCustomer(customer,description, message.externalReference());
             notifyCustomerUseCase.insert(notifyCustomer);
             ack.acknowledge();

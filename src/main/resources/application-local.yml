@@ -31,4 +31,4 @@ kafka:
     consumer:
       error:
         payment: tech.error.payment
-        groupId: customer-payment
+        groupId: orders

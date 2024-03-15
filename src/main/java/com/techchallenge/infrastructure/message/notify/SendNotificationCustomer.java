@@ -19,20 +19,21 @@ public class SendNotificationCustomer {
 
     private NotifyCustomerUseCase notifyCustomerUseCase;
 
+    public SendNotificationCustomer(NotifyCustomerUseCase notifyCustomerUseCase) {
+        this.notifyCustomerUseCase = notifyCustomerUseCase;
+    }
+
     @Scheduled(fixedDelay = MINUTE)
     public void send(){
-
         List<NotifyCustomer> notSent = notifyCustomerUseCase.findNotSent();
         if(notSent.isEmpty()){
             log.info("No message found for send");
         }
-
         notSent.forEach( notSend -> {
             log.info("send email {}", notSend);
             notSend.setNotifySent(Boolean.TRUE);
             notifyCustomerUseCase.insert(notSend);
         });
-
     }
 
 }

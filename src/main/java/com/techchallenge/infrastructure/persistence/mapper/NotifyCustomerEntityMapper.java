@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class NotifyCustomerMapper {
+public class NotifyCustomerEntityMapper {
 
     private CustomerEntityMapper customerEntityMapper;
 
-    public NotifyCustomerMapper(CustomerEntityMapper customerEntityMapper) {
+    public NotifyCustomerEntityMapper(CustomerEntityMapper customerEntityMapper) {
         this.customerEntityMapper = customerEntityMapper;
     }
 
