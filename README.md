@@ -16,7 +16,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 ### Cadastro, atualização e buscas de clientes
 
-#### Cadastrar clientes
+#### Cadastrar cliente
 
 ```http
   POST api/v1/customers
@@ -24,11 +24,11 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `cpf` | `string` | **Obrigatório**. Cpf do clientes |
-| `nome` | `string` | **Obrigatório**. Nome do clientes |
-| `email` | `string` |  E-mail do clientes |
+| `cpf` | `string` | **Obrigatório**. Cpf do cliente |
+| `nome` | `string` | **Obrigatório**. Nome do cliente |
+| `email` | `string` |  E-mail do cliente |
 
-#### Atualizar clientes
+#### Atualizar cliente
 
 ```http
   PUT api/v1/customers
@@ -36,9 +36,9 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `cpf` | `string` | **Obrigatório**. Cpf do clientes |
-| `nome` | `string` | **Obrigatório**. Nome do clientes |
-| `email` | `string` |  E-mail do clientes |
+| `cpf` | `string` | **Obrigatório**. Cpf do cliente |
+| `nome` | `string` | **Obrigatório**. Nome do cliente |
+| `email` | `string` |  E-mail do cliente |
 
 
 #### Buscar clientes
@@ -48,7 +48,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `cpf`      | `string` | **Obrigatório**. O Cpf do cliente que você~quer |
+| `cpf`      | `string` | **Obrigatório**. O Cpf do cliente que você quer |
 
 #### Excluir clientes
 ```http
@@ -57,7 +57,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `cpf`      | `string` | **Obrigatório**. O Cpf do cliente que você~quer excluir |
+| `cpf`      | `string` | **Obrigatório**. O Cpf do cliente que você quer excluir |
 
 ### Cadastro, buscas de solicitações de exclusão de clientes
 
@@ -69,15 +69,15 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `cpf` | `string` | **Obrigatório**. Cpf do clientes |
-| `nome` | `string` | **Obrigatório**. Nome do clientes |
-| `telefone` | `string` | **Obrigatório**. Telefone do clientes |
-| `city` | `string` | **Obrigatório**. Cidade (Endereço) do clientes |
-| `cep` | `string` | **Obrigatório**. Cep (Endereço) do clientes |
-| `state` | `string` |**Obrigatório**. Estado (Endereço) do clientes |
-| `street` | `string` | **Obrigatório**. Rua (Endereço) do clientes |
-| `number` | `string` | **Obrigatório**. Numero (Endereço)do clientes |
-| `neighborhood` | `string` |**Obrigatório**. Bairro (Endereço) do clientes |
+| `cpf` | `string` | **Obrigatório**. Cpf do cliente |
+| `nome` | `string` | **Obrigatório**. Nome do cliente |
+| `telefone` | `string` | **Obrigatório**. Telefone do cliente |
+| `city` | `string` | **Obrigatório**. Cidade (Endereço) do cliente |
+| `cep` | `string` | **Obrigatório**. Cep (Endereço) do cliente |
+| `state` | `string` |**Obrigatório**. Estado (Endereço) do cliente |
+| `street` | `string` | **Obrigatório**. Rua (Endereço) do cliente |
+| `number` | `string` | **Obrigatório**. Numero (Endereço)do cliente |
+| `neighborhood` | `string` |**Obrigatório**. Bairro (Endereço) do cliente |
 
 #### Buscar solicitação 
 
@@ -97,7 +97,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 | Parâmetro   | Tipo       |  Default|Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |:--- |
-| `exclude`    |   `boolean` |false |Valor false retorna todas as solicitações em espera  |
+| `exclude`    |   `boolean` |false |Valor false retorna todas as solicitações em espera, valor true retorna todas as solicitações atendidas  |
 | `page`      | `int` | 0| Valor 0 retornara do primeiro registro até o valor  do size|
 | `size`      | `int` | 10 |Quantidade de registro que retornaram na resposta|
 
@@ -179,7 +179,7 @@ Execute os comandos
 
 #### Aplicação:
 
-docker hub [@repositorio](https://hub.docker.com/r/daniel36/tech-challenge-payment/tags)
+docker hub [@repositorio](https://hub.docker.com/r/daniel36/tech-challenge-customer/tags)
 
 Clone o projeto
 
