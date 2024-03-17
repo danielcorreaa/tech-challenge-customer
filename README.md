@@ -114,6 +114,94 @@ Microsserviço responsável pelo gerenciamento de clientes
 | :---------- | :--------- | :------------------------------------------ |
 | `orderId`      | `string` | **Obrigatório**. Código do pedido com pagamento reprovado |
 
+
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/danielcorreaa/tech-challenge-customer.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-customer
+```
+
+Docker
+
+```bash
+  docker compose up -d
+```
+
+No navegador
+
+```bash
+  http://localhost:8085/
+```
+
+## Deploy
+
+### Para subir a aplicação usando kubernetes
+
+#### Infraestrutura:
+
+Clone o projeto com a infraestrutura
+
+```bash
+  git clone danielcorreaa/tech-challenge-infra-terraform-kubernetes
+```
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-infra-terraform-kubernetes/
+````
+
+Execute os comandos
+
+```bash   
+- run: kubectl apply -f kubernetes/metrics.yaml 
+- run: kubectl apply -f kubernetes/mysql/mysql-secrets.yaml 
+- run: kubectl apply -f kubernetes/mysql/mysql-configmap.yaml 
+- run: kubectl apply -f kubernetes/mysql/mysql-pv.yaml 
+- run: kubectl apply -f kubernetes/mysql/mysql-service.yaml 
+- run: kubectl apply -f kubernetes/mysql/mysql-statefulset.yaml
+
+- run: kubectl apply -f kubernetes/kafka/kafka-configmap.yaml
+- run: kubectl apply -f kubernetes/kafka/zookeeper-deployment.yaml
+- run: kubectl apply -f kubernetes/kafka/zookeeper-service.yaml
+- run: kubectl apply -f kubernetes/kafka/kafka-deployment.yaml
+- run: kubectl apply -f kubernetes/kafka/kafka-service.yaml
+- run: kubectl apply -f kubernetes/kafka/kafka-ui-deployment.yaml
+
+````
+
+#### Aplicação:
+
+docker hub [@repositorio](https://hub.docker.com/r/daniel36/tech-challenge-payment/tags)
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/danielcorreaa/tech-challenge-customer.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-customer
+```
+
+Execute os comandos
+```bash   
+- run: kubectl apply -f k8s/customers-deployment.yaml
+- run: kubectl apply -f k8s/customers-service.yaml
+- run: kubectl apply -f k8s/customers-hpa.yaml
+- run: kubectl get svc
+
+````
+
 ## Documentação Saga
 
 ### Padrão escolhido: Coreografia 

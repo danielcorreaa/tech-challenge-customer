@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: customer
-        image: daniel36/tech-challenge-customer:23
+        image: daniel36/tech-challenge-customer:latest
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
