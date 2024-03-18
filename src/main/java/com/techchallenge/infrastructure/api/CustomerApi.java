@@ -1,5 +1,6 @@
 package com.techchallenge.infrastructure.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/customers")
+@Tag(name = "Customer API")
 public class CustomerApi {
 
 	private CustomerUseCase custumerUseCase;
