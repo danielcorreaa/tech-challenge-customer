@@ -129,6 +129,8 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 #### Desenho da solução
 
+- [@Desenho Padrão Saga coreografado.](https://danielcorreaa.github.io/tech-challenge-production/images/saga-diagrama.png)
+
 ![Desenho Padrão Saga coreografado.](/images/saga-diagrama.png)
 
 ## Rodando localmente
