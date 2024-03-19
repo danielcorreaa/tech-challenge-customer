@@ -115,6 +115,22 @@ Microsserviço responsável pelo gerenciamento de clientes
 | `orderId`      | `string` | **Obrigatório**. Código do pedido com pagamento reprovado |
 
 
+## Relatório RIPD
+*RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS*
+
+- [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
+
+## Documentação Saga
+
+### Padrão escolhido: Coreografia 
+
+#### Razão de utilizar a coreografia
+*Escolhi o padrão coreografado para evitar deixar tudo centralizado no serviço de pedidos, no caso de acontecer alguma falha no serviço de pedidos toda a operação de notificar cliente e enviar os pedidos pagos para a cozinha seria paralizada, com a coreografia mesmo que tenha algum problema com o serviço de pedidos, a cozinha ainda recebe os pedidos com pagamentos aprovados, nao parando a produção de pedidos pagos, e os clientes recebem notificaçao de problemas com o pagamento.*
+
+#### Desenho da solução
+
+![Desenho Padrão Saga coreografado.](/images/saga-diagrama.png)
+
 ## Rodando localmente
 
 Clone o projeto
@@ -202,14 +218,5 @@ Execute os comandos
 
 ````
 
-## Documentação Saga
 
-### Padrão escolhido: Coreografia 
-
-#### Razão de utilizar a coreografia
-*Escolhi o padrão coreografado para evitar deixar tudo centralizado no serviço de pedidos, no caso de acontecer alguma falha no serviço de pedidos toda a operação de notificar cliente e enviar os pedidos pagos para a cozinha seria paralizada, com a coreografia mesmo que tenha algum problema com o serviço de pedidos, a cozinha ainda recebe os pedidos com pagamentos aprovados, nao parando a produção de pedidos pagos, e os clientes recebem notificaçao de problemas com o pagamento.*
-
-#### Desenho da solução
-
-![Desenho Padrão Saga coreografado.](/images/saga-diagrama.png)
 

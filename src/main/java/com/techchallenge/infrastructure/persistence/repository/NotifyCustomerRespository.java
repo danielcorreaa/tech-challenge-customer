@@ -10,6 +10,6 @@ import java.util.List;
 public interface NotifyCustomerRespository extends JpaRepository<NotifyCustomerEntity, String> {
 
 
-    @Query("Select n from NotifyCustomerEntity n  JOIN FETCH n.customerEntity where n.notifySent = false")
+    @Query("Select n from NotifyCustomerEntity n  where n.notifySent = false")
     List<NotifyCustomerEntity> findNotSent();
 }

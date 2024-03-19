@@ -16,7 +16,7 @@ public class NotifyCustomerEntity {
     @Id
     @Column(name = "orderId", nullable = false)
     private String orderId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "customer_cpf")
     private CustomerEntity customerEntity;
     private String description;
