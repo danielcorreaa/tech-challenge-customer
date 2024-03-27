@@ -99,7 +99,7 @@ class SolicitationExcludeApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("solicitation/api/v1")
+                    .post("tech-challenge-customer/solicitation/api/v1")
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body(matchesJsonSchemaInClasspath("./data/solicitation-exclude-validation-schema.json"));
@@ -116,7 +116,7 @@ class SolicitationExcludeApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("solicitation/api/v1")
+                    .post("tech-challenge-customer/solicitation/api/v1")
                     .then()
                     .statusCode(HttpStatus.CREATED.value())
                     .header("Content-Type", notNullValue())
@@ -134,7 +134,7 @@ class SolicitationExcludeApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("solicitation/api/v1")
+                    .post("tech-challenge-customer/solicitation/api/v1")
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -150,7 +150,7 @@ class SolicitationExcludeApiIT {
         @Test
         void testFindByCpf() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("solicitation/api/v1/find/{cpf}", "47388188053")
+                    .when().get("tech-challenge-customer/solicitation/api/v1/find/{cpf}", "47388188053")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -161,7 +161,7 @@ class SolicitationExcludeApiIT {
         @Test
         void testFindByCpfNotFound() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("solicitation/api/v1/find/{cpf}", "79377085063")
+                    .when().get("tech-challenge-customer/solicitation/api/v1/find/{cpf}", "79377085063")
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value());
 
