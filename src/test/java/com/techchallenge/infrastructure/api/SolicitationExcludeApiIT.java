@@ -171,7 +171,7 @@ class SolicitationExcludeApiIT {
         void testFindAllSolicitation_waitedTodelete() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .when()
-                    .get( "/solicitation/api/v1/find?exclude=false&page=0&size=10")
+                    .get( "/tech-challenge-customer/solicitation/api/v1/find?exclude=false&page=0&size=10")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -184,7 +184,7 @@ class SolicitationExcludeApiIT {
         void testFindAllSolicitation_deleted() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .when()
-                    .get( "/solicitation/api/v1/find?exclude=true&page=0&size=10")
+                    .get( "/tech-challenge-customer/solicitation/api/v1/find?exclude=true&page=0&size=10")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())

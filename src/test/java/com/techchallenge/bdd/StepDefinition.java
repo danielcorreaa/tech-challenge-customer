@@ -23,7 +23,7 @@ public class StepDefinition {
 
     private String cpf;
 
-    private String ENDPOINT_CUSTOMERS = "http://localhost:8085/customers/api/v1";
+    private String ENDPOINT_CUSTOMERS = "http://localhost:8085/tech-challenge-customer/customers/api/v1";
 
     @Dado("que quero cadastrar um cliente")
     public void que_quero_cadastrar_um_cliente() {

@@ -59,6 +59,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CustomerApiIT {
 
+    public static final String PATH = "/tech-challenge-customer/customers/api/v1";
     @Autowired
     CustomerEntityMapper mapper;
     @Autowired
@@ -112,7 +113,7 @@ class CustomerApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/customers/api/v1")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -126,7 +127,7 @@ class CustomerApiIT {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/customers/api/v1")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -141,7 +142,7 @@ class CustomerApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/customers/api/v1")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.CREATED.value())
                     .header("Content-Type", notNullValue())
@@ -158,7 +159,7 @@ class CustomerApiIT {
         void testUpdatetCustomerFieldsValid() throws Exception {
             CustomerRequest request = new CustomerRequest("09651313005", "Doug Funny Test", "doug@email.com");
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(request).when().put("/customers/api/v1")
+                    .body(request).when().put(PATH)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -171,7 +172,7 @@ class CustomerApiIT {
         void testUpdatetCustomerNotFound() throws Exception {
             CustomerRequest request = new CustomerRequest("64438401003", "Ze Comeia", "comeia@email.com");
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(request).when().put("/customers/api/v1")
+                    .body(request).when().put(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -184,7 +185,7 @@ class CustomerApiIT {
         @Test
         void testFindByCpf() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("/customers/api/v1/find/{cpf}", "79377085063")
+                    .when().get(PATH+"/find/{cpf}", "79377085063")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -196,7 +197,7 @@ class CustomerApiIT {
         @Test
         void testFindByCpfNotFound() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("/customers/api/v1/find/{cpf}", "79377085063")
+                    .when().get(PATH+"/find/{cpf}", "79377085063")
                     .then()
                     .statusCode(HttpStatus.OK.value());
 
@@ -209,7 +210,7 @@ class CustomerApiIT {
         @Test
         void testDeleteCustomer(){
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().delete("/customers/api/v1/delete/{cpf}", "15324406007")
+                    .when().delete(PATH+"/delete/{cpf}", "15324406007")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasKey("code"))
