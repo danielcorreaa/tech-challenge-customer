@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/solicitation/exclude")
+@RequestMapping("solicitation/api/v1")
 @Tag(name = "Solicitation Exclude API")
 public class SolicitationExcludeApi {
 
@@ -34,7 +34,7 @@ public class SolicitationExcludeApi {
                                                            UriComponentsBuilder uri) {
         SolicitationExclude solicitationExclude = solicitationExcludeUseCase
                 .insert(mapper.toSolicitateExclude(request));
-        UriComponents uriComponents = uri.path("/api/v1/solicitation/exclude/find/{cpf}")
+        UriComponents uriComponents = uri.path("/solicitation/api/v1/find/{cpf}")
                 .buildAndExpand(solicitationExclude.getCpfValue());
         return ResponseEntity.created(uriComponents.toUri()).body(Result.create(
                 mapper.toSolicitateExcludeResponse(solicitationExclude)));
