@@ -19,7 +19,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 #### Cadastrar cliente
 
 ```http
-  POST api/v1/customers
+  POST customers/api/v1
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -31,7 +31,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 #### Atualizar cliente
 
 ```http
-  PUT api/v1/customers
+  PUT customers/api/v1
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -43,7 +43,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 #### Buscar clientes
 ```http
-  GET api/v1/customers/find/${cpf}
+  GET customers/api/v1/find/${cpf}
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -52,7 +52,7 @@ Microsserviço responsável pelo gerenciamento de clientes
 
 #### Excluir clientes
 ```http
-  DELETE api/v1/customers/delete/${cpf}
+  DELETE customers/api/v1/delete/${cpf}
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |

@@ -73,7 +73,7 @@ CustomerApiTest {
             CustomerRequest request = new CustomerRequest("12345568911", "Ze Comeia", "comeia@email.com");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/customers").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/customers/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isBadRequest()).andReturn();
 
@@ -92,7 +92,7 @@ CustomerApiTest {
             CustomerRequest request = new CustomerRequest("", "", "comeia@email.com");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/customers").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/customers/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isBadRequest()).andReturn();
 
@@ -118,7 +118,7 @@ CustomerApiTest {
 
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/customers").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/customers/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isCreated()).andReturn();
 
@@ -152,7 +152,7 @@ CustomerApiTest {
 
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(put("/api/v1/customers").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(put("/customers/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isOk()).andReturn();
 
@@ -183,7 +183,7 @@ CustomerApiTest {
 
             when(repository.findByCpf("02974127010")).thenReturn(Optional.ofNullable(entity));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/customers/find/02974127010").contentType(MediaType.APPLICATION_JSON))
+            MvcResult mvcResult = mockMvc.perform(get("/customers/api/v1/find/02974127010").contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andReturn();
 
             Optional<Result<CustomerResponse>> response = jsonUtils.parse(mvcResult.getResponse().getContentAsString(),
@@ -212,7 +212,7 @@ CustomerApiTest {
 
             when(repository.findByCpf("02974127010")).thenReturn(Optional.ofNullable(entity));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/customers/find/123232323").contentType(MediaType.APPLICATION_JSON))
+            MvcResult mvcResult = mockMvc.perform(get("/customers/api/v1/find/123232323").contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound()).andReturn();
 
             Optional<Result<CustomerResponse>> response = jsonUtils.parse(mvcResult.getResponse().getContentAsString(),
