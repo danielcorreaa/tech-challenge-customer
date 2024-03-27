@@ -1,5 +1,6 @@
 package com.techchallenge.infrastructure.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,8 @@ import com.techchallenge.infrastructure.api.mapper.CustomerMapper;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/customers")
+@RequestMapping("customers/api/v1")
+@Tag(name = "Customer API")
 public class CustomerApi {
 
 	private CustomerUseCase custumerUseCase;
@@ -38,7 +40,7 @@ public class CustomerApi {
 	public ResponseEntity<Result<CustomerResponse>> insert(@RequestBody @Valid CustomerRequest request,
 														   UriComponentsBuilder uri) {
 		Customer custumer = custumerUseCase.insert(mapper.toCustomer(request));
-		UriComponents uriComponents = uri.path("/api/v1/custumers/find/{cpf}")
+		UriComponents uriComponents = uri.path("/custumers/api/v1/find/{cpf}")
 				.buildAndExpand(custumer.getCpfValue().orElse(""));
 		return ResponseEntity.created(uriComponents.toUri()).body(Result.create(mapper.toCustomerResponse(custumer)));
 	}

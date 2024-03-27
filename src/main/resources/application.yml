@@ -1,5 +1,7 @@
 server:
   port: 8082
+  servlet:
+    context-path: /tech-challenge-customer/
 spring:
   application:
     name: tech-challenge-customer
@@ -9,6 +11,9 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS}
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -23,3 +28,10 @@ swagger:
   contact:
     name: Daniel A. Correa
     email: daniel.cor@outlook.com
+
+kafka:
+  topic:
+    consumer:
+      error:
+        payment: tech.error.payment
+        groupId: customer-payment

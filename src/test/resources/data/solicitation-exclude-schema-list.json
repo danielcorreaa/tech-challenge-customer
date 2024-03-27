@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "number"
+    },
+    "body": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "telephone": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "cep": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "neighborhood": {
+            "type": "string"
+          },
+          "dateSolicitation": {
+            "type": "string"
+          },
+          "executed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "cpf",
+          "name",
+          "telephone",
+          "city",
+          "cep",
+          "state",
+          "street",
+          "number",
+          "neighborhood",
+          "dateSolicitation",
+          "executed"
+        ]
+      }
+    },
+    "hasNext": {
+      "type": "boolean"
+    },
+    "total": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "code",
+    "body",
+    "hasNext",
+    "total"
+  ]
+}

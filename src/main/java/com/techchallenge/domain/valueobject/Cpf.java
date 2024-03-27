@@ -48,4 +48,8 @@ public class Cpf {
 		return value;
 	}
 
+	public String getValueWithoutEspecialCaracter(){
+		return removeEspecialCaracter(value);
+	}
+
 }

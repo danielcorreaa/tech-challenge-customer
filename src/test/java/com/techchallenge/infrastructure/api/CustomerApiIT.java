@@ -35,6 +35,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -58,6 +59,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CustomerApiIT {
 
+    public static final String PATH = "/tech-challenge-customer/customers/api/v1";
     @Autowired
     CustomerEntityMapper mapper;
     @Autowired
@@ -66,23 +68,33 @@ class CustomerApiIT {
     @LocalServerPort
     private int port;
     @Container
-    static MySQLContainer mySQLContainer = new MySQLContainer(DockerImageName.parse("mysql:8.0-debian"));
+    static MySQLContainer mySQLContainer =
+            new MySQLContainer(DockerImageName.parse("mysql:8.0-debian"));
+
+    @Container
+    static KafkaContainer kafkaContainer =
+            new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.4.0"));
 
     @DynamicPropertySource
-    public static void configureTestProperties(DynamicPropertyRegistry registry){
+    static void overrrideMongoDBContainerProperties(DynamicPropertyRegistry registry){
         registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
         registry.add("spring.datasource.username", mySQLContainer::getUsername);
         registry.add("spring.datasource.password", mySQLContainer::getPassword);
-        registry.add("spring.jpa.hibernate.ddl-auto",() -> "create");
+
+        registry.add("spring.kafka.bootstrap-servers", kafkaContainer::getBootstrapServers);
+
     }
     @BeforeAll
-    static void init(){
+    static void setUp(){
         mySQLContainer.withReuse(true);
         mySQLContainer.start();
+        kafkaContainer.withReuse(true);
+        kafkaContainer.start();
     }
     @AfterAll
-    static void end(){
+    static void setDown(){
         mySQLContainer.stop();
+        kafkaContainer.stop();
     }
     @BeforeEach
     void up(){
@@ -101,7 +113,7 @@ class CustomerApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/api/v1/customers")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -115,7 +127,7 @@ class CustomerApiIT {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/api/v1/customers")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -130,7 +142,7 @@ class CustomerApiIT {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(request)
                     .when()
-                    .post("/api/v1/customers")
+                    .post(PATH)
                     .then()
                     .statusCode(HttpStatus.CREATED.value())
                     .header("Content-Type", notNullValue())
@@ -147,7 +159,7 @@ class CustomerApiIT {
         void testUpdatetCustomerFieldsValid() throws Exception {
             CustomerRequest request = new CustomerRequest("09651313005", "Doug Funny Test", "doug@email.com");
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(request).when().put("/api/v1/customers")
+                    .body(request).when().put(PATH)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -160,7 +172,7 @@ class CustomerApiIT {
         void testUpdatetCustomerNotFound() throws Exception {
             CustomerRequest request = new CustomerRequest("64438401003", "Ze Comeia", "comeia@email.com");
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .body(request).when().put("/api/v1/customers")
+                    .body(request).when().put(PATH)
                     .then()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .body("$", hasKey("errors"))
@@ -173,7 +185,7 @@ class CustomerApiIT {
         @Test
         void testFindByCpf() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("/api/v1/customers/find/{cpf}", "79377085063")
+                    .when().get(PATH+"/find/{cpf}", "79377085063")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .header("Content-Type", notNullValue())
@@ -185,7 +197,7 @@ class CustomerApiIT {
         @Test
         void testFindByCpfNotFound() throws Exception {
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().get("/api/v1/customers/find/{cpf}", "79377085063")
+                    .when().get(PATH+"/find/{cpf}", "79377085063")
                     .then()
                     .statusCode(HttpStatus.OK.value());
 
@@ -198,7 +210,7 @@ class CustomerApiIT {
         @Test
         void testDeleteCustomer(){
             given().contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .when().delete("/api/v1/customers/delete/{cpf}", "15324406007")
+                    .when().delete(PATH+"/delete/{cpf}", "15324406007")
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasKey("code"))
